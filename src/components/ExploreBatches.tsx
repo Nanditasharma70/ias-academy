@@ -1,6 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Course {
   id: number;
@@ -37,7 +38,7 @@ export default function ExploreBatches() {
         type: "ONLINE",
         title: "Repeaters Batch 2026 – Advanced Prep",
         lang: "Hinglish",
-        img: "/repeaters.jpg",
+        img: "/images/course-pre-main.jpg",
         start: "5 Aug 2025",
         end: "30 Apr 2026",
         price: "₹14999",
@@ -50,7 +51,7 @@ export default function ExploreBatches() {
         type: "OFFLINE",
         title: "GS Foundation 2026 (Classroom Program)",
         lang: "English",
-        img: "/gsfoundation.jpg",
+        img: "/images/course-pre-main.jpg",
         start: "1 Sep 2025",
         end: "31 May 2026",
         price: "₹29999",
@@ -63,7 +64,7 @@ export default function ExploreBatches() {
         type: "ONLINE",
         title: "BA + UPSC Integrated Program",
         lang: "English",
-        img: "/degree.jpg",
+        img: "/images/ba-upsc.jpg",
         start: "15 Aug 2025",
         end: "15 May 2028",
         price: "₹79999",
@@ -76,7 +77,7 @@ export default function ExploreBatches() {
         type: "ONLINE",
         title: "GS + Public Administration (Combo) 2026",
         lang: "Hinglish",
-        img: "/combo.jpg",
+        img: "/images/course-pre-main.jpg",
         start: "10 Aug 2025",
         end: "10 May 2026",
         price: "₹44999",
@@ -89,7 +90,7 @@ export default function ExploreBatches() {
         type: "OFFLINE",
         title: "Geography Optional 2026",
         lang: "English",
-        img: "/optional.jpg",
+        img: "/images/course-geograhy.jpg",
         start: "5 Sep 2025",
         end: "5 Mar 2026",
         price: "₹24999",
@@ -102,7 +103,7 @@ export default function ExploreBatches() {
         type: "ONLINE",
         title: "CSAT Test Series (Target 2026) – (Online)",
         lang: "Hinglish",
-        img: "/csat.jpg",
+        img: "/images/course-csat.png",
         start: "27 Jul 2025",
         end: "31 May 2026",
         price: "₹1999",
@@ -113,7 +114,7 @@ export default function ExploreBatches() {
         type: "OFFLINE",
         title: "Prelims Test Series (GS) (Target 2026) – (Offline)",
         lang: "English",
-        img: "/placeholder.png",
+        img: "/images/course-prelims.jpg",
         start: "",
         end: "",
         price: "₹15999",
@@ -124,7 +125,7 @@ export default function ExploreBatches() {
         type: "ONLINE",
         title: "SRIJAN 2.0 (Pre + Mains) 2026 (Hinglish)",
         lang: "Hinglish",
-        img: "/srijan.jpg",
+        img: "/images/course-pre-main.jpg",
         start: "28 Jul 2025",
         end: "30 Sep 2026",
         price: "₹9999",
@@ -132,6 +133,22 @@ export default function ExploreBatches() {
       },
     ],
   };
+
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const scrollAmount = container.offsetWidth * 0.8; // Scroll 80% of container width
+    if (direction === "left") {
+      container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    } else {
+      container.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
+
+  const coursesToShow = allCourses[activeTab] || [];
 
   return (
     <section className="py-10 bg-white">
@@ -142,12 +159,12 @@ export default function ExploreBatches() {
         </h2>
 
         {/* Tabs */}
-        <div className="flex bg-gray-100 justify-center space-x-6 mb-6 pt-2 flex-wrap">
+        <div className="flex justify-center mb-6 overflow-x-auto scrollbar-hide space-x-6 pt-2 px-2 sm:px-0">
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`pb-2 px-2 ${
+              className={`flex-shrink-0 pb-2 px-2 whitespace-nowrap ${
                 activeTab === tab
                   ? "text-[#1E3A8A] border-b-2 border-[#1E3A8A] font-semibold"
                   : "text-gray-600"
@@ -158,65 +175,88 @@ export default function ExploreBatches() {
           ))}
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 m-6">
-          {allCourses[activeTab]?.map((course) => (
-            <div
-              key={course.id}
-              className="bg-white border rounded-xl shadow-sm overflow-hidden"
-            >
-              {/* Image */}
-              <div className="relative">
-                <Image
-                  src={course.img}
-                  alt={course.title}
-                  className="w-full h-48 object-cover"
-                />
-                <span
-                  className={`absolute top-2 left-2 px-3 py-1 text-xs font-bold text-white rounded-tr-lg rounded-bl-lg ${
-                    course.type === "ONLINE" ? "bg-blue-600" : "bg-red-600"
-                  }`}
-                >
-                  {course.type}
-                </span>
-              </div>
+        {/* Carousel with chevrons */}
+        <div className="relative">
+          {/* Left Chevron */}
+          <button
+            onClick={() => scroll("left")}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-md hover:bg-gray-100"
+          >
+            <ChevronLeft className="w-6 h-6 text-gray-700" />
+          </button>
 
-              {/* Content */}
-              <div className="p-4">
-                <h3 className="font-semibold text-sm">{course.title}</h3>
-                <span className="inline-block bg-gray-200 text-xs px-2 py-1 rounded mt-2">
-                  {course.lang}
-                </span>
+          {/* Right Chevron */}
+          <button
+            onClick={() => scroll("right")}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-md hover:bg-gray-100"
+          >
+            <ChevronRight className="w-6 h-6 text-gray-700" />
+          </button>
 
-                {course.start && course.end && (
-                  <p className="text-xs text-gray-600 mt-2">
-                    Starts on {course.start} Ends on {course.end}
-                  </p>
-                )}
-
-                <div className="mt-2">
-                  <span className="text-[#1E3A8A] font-bold mr-2">
-                    {course.price}
+          <div
+            ref={scrollRef}
+            className="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide"
+          >
+            {coursesToShow.map((course) => (
+              <div
+                key={course.id}
+                className="bg-white border rounded-xl shadow-sm overflow-hidden flex-shrink-0 w-72"
+              >
+                {/* Image */}
+                <div className="relative">
+                  <Image
+                    src={course.img}
+                    alt={course.title}
+                    width={300}
+                    height={200}
+                    className="w-full h-48 object-cover"
+                  />
+                  <span
+                    className={`absolute top-2 left-2 px-3 py-1 text-xs font-bold text-white rounded-tr-lg rounded-bl-lg ${
+                      course.type === "ONLINE" ? "bg-blue-600" : "bg-red-600"
+                    }`}
+                  >
+                    {course.type}
                   </span>
-                  {course.oldPrice && (
-                    <span className="line-through text-gray-400 text-sm">
-                      {course.oldPrice}
-                    </span>
-                  )}
                 </div>
 
-                {/* Buttons */}
-                <div className="flex space-x-2 mt-4">
-                  <button className="flex-1 border border-[#1E3A8A] text-[#1E3A8A] py-1 rounded hover:bg-[#1E3A8A] hover:text-white transition">
-                    EXPLORE
-                  </button>
-                  <button className="flex-1 bg-[#1E3A8A] text-white py-1 rounded hover:bg-blue-900 transition">
-                    BUY NOW
-                  </button>
+                {/* Content */}
+                <div className="p-4">
+                  <h3 className="font-semibold text-sm">{course.title}</h3>
+                  <span className="inline-block bg-gray-200 text-xs px-2 py-1 rounded mt-2">
+                    {course.lang}
+                  </span>
+
+                  {course.start && course.end && (
+                    <p className="text-xs text-gray-600 mt-2">
+                      Starts on {course.start} Ends on {course.end}
+                    </p>
+                  )}
+
+                  <div className="mt-2">
+                    <span className="text-[#1E3A8A] font-bold mr-2">
+                      {course.price}
+                    </span>
+                    {course.oldPrice && (
+                      <span className="line-through text-gray-400 text-sm">
+                        {course.oldPrice}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Buttons */}
+                  <div className="flex space-x-2 mt-4">
+                    <button className="flex-1 border border-[#1E3A8A] text-[#1E3A8A] py-1 rounded hover:bg-[#1E3A8A] hover:text-white transition">
+                      EXPLORE
+                    </button>
+                    <button className="flex-1 bg-[#1E3A8A] text-white py-1 rounded hover:bg-blue-900 transition">
+                      BUY NOW
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Get More */}

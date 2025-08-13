@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -7,62 +8,72 @@ import "swiper/css/navigation";
 import Image from "next/image";
 
 const videos = [
-  { img: "/images/video1.jpg", url: "https://www.youtube.com/watch?v=xxxx" },
-  { img: "/images/video2.jpg", url: "https://www.youtube.com/watch?v=xxxx" },
-  { img: "/images/video3.jpg", url: "https://www.youtube.com/watch?v=xxxx" },
-  { img: "/images/video4.jpg", url: "https://www.youtube.com/watch?v=xxxx" },
-  { img: "/images/video5.jpg", url: "https://www.youtube.com/watch?v=xxxx" },
+  { img: "/images/video1.jpg", url: "https://www.youtube.com/watch?v=G5CTSx_nhI4&list=PLQG-bVtyB9_bXcb-tkYGAzk-DY-P1GloP&t=3s" },
+  { img: "/images/video2.jpg", url: "https://www.youtube.com/watch?v=G5CTSx_nhI4&list=PLQG-bVtyB9_bXcb-tkYGAzk-DY-P1GloP&t=3s" },
+  { img: "/images/video3.jpg", url: "https://www.youtube.com/watch?v=G5CTSx_nhI4&list=PLQG-bVtyB9_bXcb-tkYGAzk-DY-P1GloP&t=3s" },
+  { img: "/images/video4.jpg", url: "https://www.youtube.com/watch?v=G5CTSx_nhI4&list=PLQG-bVtyB9_bXcb-tkYGAzk-DY-P1GloP&t=3s" },
+  { img: "/images/video5.jpg", url: "https://www.youtube.com/watch?v=G5CTSx_nhI4&list=PLQG-bVtyB9_bXcb-tkYGAzk-DY-P1GloP&t=3s" },
 ];
 
 export default function VideoCarousel() {
-  return (
-    <section className="bg-white py-8 px-8">
-     <div className="max-w-7xl mx-auto px-6 text-center">
-  <h2 className="text-xl font-semibold text-[#1E3A8A] mb-6">
-    Latest Videos & Toppers’ Talks
-  </h2>
+  const [activeVideo, setActiveVideo] = useState<number | null>(null);
 
-        <div className="relative flex items-center">
+  return (
+    <section className="bg-white py-8 px-4 sm:px-8">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 text-center">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-[#1E3A8A] mb-6">
+          Latest Videos & Toppers’ Talks
+        </h2>
+
+        <div className="relative">
           <Swiper
             modules={[Navigation]}
             navigation={{
               prevEl: ".swiper-prev",
               nextEl: ".swiper-next",
             }}
-            spaceBetween={20}
-            slidesPerView={2}
+            spaceBetween={16}
+            slidesPerView={1.2}
             breakpoints={{
-              640: { slidesPerView: 2 },
-              768: { slidesPerView: 3 },
-              1024: { slidesPerView: 4 },
+              480: { slidesPerView: 1.5, spaceBetween: 16 },
+              640: { slidesPerView: 2, spaceBetween: 16 },
+              768: { slidesPerView: 3, spaceBetween: 20 },
+              1024: { slidesPerView: 4, spaceBetween: 20 },
             }}
             className="w-full"
           >
             {videos.map((video, idx) => (
               <SwiperSlide key={idx}>
-                <a
-                  href={video.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block"
+                <div
+                  className="relative rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 my-4 aspect-video cursor-pointer"
+                  onClick={() => setActiveVideo(idx)}
                 >
-                  <div className="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 my-4">
+                  {activeVideo === idx ? (
+                    <iframe
+                      src={video.url}
+                      title={`Video ${idx + 1}`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full"
+                    />
+                  ) : (
                     <Image
                       src={video.img}
                       alt={`Video ${idx + 1}`}
-                      className="w-full h-40 object-cover"
+                      fill
+                      className="object-cover"
                     />
-                  </div>
-                </a>
+                  )}
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>
 
           {/* Navigation Arrows */}
-          <div className="swiper-prev absolute left-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer bg-[#FFD700] text-[#1E3A8A] rounded-full p-3 shadow-md hover:bg-[#1E3A8A] hover:text-white transition duration-300">
+          <div className="swiper-prev absolute -left-3 sm:-left-6 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer bg-[#FFD700] text-[#1E3A8A] rounded-full p-2 sm:p-3 shadow-md hover:bg-[#1E3A8A] hover:text-white transition duration-300">
             ❮
           </div>
-          <div className="swiper-next absolute right-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer bg-[#FFD700] text-[#1E3A8A] rounded-full p-3 shadow-md hover:bg-[#1E3A8A] hover:text-white transition duration-300">
+          <div className="swiper-next absolute -right-3 sm:-right-6 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer bg-[#FFD700] text-[#1E3A8A] rounded-full p-2 sm:p-3 shadow-md hover:bg-[#1E3A8A] hover:text-white transition duration-300">
             ❯
           </div>
         </div>

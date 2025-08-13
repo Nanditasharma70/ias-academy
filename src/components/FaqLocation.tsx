@@ -43,7 +43,7 @@ export default function FAQAndLocation() {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center justify-center">
         {/* FAQ Section */}
         <div>
-          <h2 className="text-2xl font-bold text-[#1E3A8A] mb-6 ms-6">FAQ</h2>
+          <h2 className="text-3xl font-bold text-[#1E3A8A] mb-6 ms-6">FAQ</h2>
           <div className="space-y-4">
             {faqs.map((faq, idx) => (
               <div
