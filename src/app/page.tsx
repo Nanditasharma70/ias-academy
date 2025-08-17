@@ -1,7 +1,9 @@
+import AboutSection from "@/components/AboutSection";
 import CoachingLocations from "@/components/CoachingLocation";
 import CourseForm from "@/components/CourseForm";
 import ExploreBatches from "@/components/ExploreBatches";
 import FAQAndLocation from "@/components/FaqLocation";
+import FeatureCourse from "@/components/FeatureCourse";
 import FeaturedCourses from "@/components/FeaturedCourse";
 import Footer from "@/components/Footer";
 import FreeResources from "@/components/FreeResources";
@@ -10,6 +12,8 @@ import HeroSlider from "@/components/Hero";
 import TopHeader from "@/components/TopHeader";
 import ToppersCarousel from "@/components/TopperCarousel";
 import VideoCarousel from "@/components/VideoCarousel";
+import WhyChoose from "@/components/WhyChoose";
+import WhyChooseUs from "@/components/WhyChoose";
 
 export default function Home() {
   return (
@@ -17,16 +21,17 @@ export default function Home() {
       <TopHeader />
       <Header />
       <HeroSlider />
+      <FeatureCourse />
       <CourseForm />
       <FreeResources />
       <ExploreBatches />
-       <main className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
+      <AboutSection />
+      <FeaturedCourses />
       <ToppersCarousel />
-    </main>
-    <FeaturedCourses/>
-    <CoachingLocations/>
-    <VideoCarousel/>
-    <FAQAndLocation/>
+      <CoachingLocations />
+      <WhyChoose/>
+      <VideoCarousel />
+      <FAQAndLocation />
       <Footer />
     </>
   );

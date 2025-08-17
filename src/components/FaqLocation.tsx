@@ -39,11 +39,13 @@ export default function FAQAndLocation() {
   };
 
   return (
-    <section className="bg-white py-10 px-10">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center justify-center">
+    <section className="bg-white py-10 px-4 sm:px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-start">
         {/* FAQ Section */}
         <div>
-          <h2 className="text-3xl font-bold text-[#1E3A8A] mb-6 ms-6">FAQ</h2>
+          <h2 className="text-2xl sm:text-2xl font-bold text-[#1E3A8A] mb-6">
+            FAQ
+          </h2>
           <div className="space-y-4">
             {faqs.map((faq, idx) => (
               <div
@@ -52,7 +54,7 @@ export default function FAQAndLocation() {
               >
                 <button
                   onClick={() => toggleFAQ(idx)}
-                  className="w-full flex justify-between items-center p-4 text-left font-medium text-gray-800"
+                  className="w-full flex justify-between items-center p-4 text-left font-medium text-gray-800 text-sm sm:text-base"
                 >
                   {faq.question}
                   {openIndex === idx ? (
@@ -73,25 +75,27 @@ export default function FAQAndLocation() {
 
         {/* Location Section */}
         <div>
-          <h2 className="text-2xl font-bold text-[#1E3A8A] mb-4">Location</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-[#1E3A8A] mb-4">
+            Location
+          </h2>
           <p className="text-[#1E3A8A] font-semibold mb-3">New Delhi</p>
           <div className="flex items-start gap-3 text-gray-700">
-            <MapPin className="w-6 h-6 text-[#1E3A8A] mt-1" />
-            <p className="leading-relaxed">
+            <MapPin className="w-6 h-6 text-[#1E3A8A] mt-1 shrink-0" />
+            <p className="leading-relaxed text-sm sm:text-base">
               IAS Academy <br />
               23-B, Knowledge Hub, <br />
               Connaught Place, <br />
               New Delhi - 110001
             </p>
           </div>
-          <p className="mt-3 text-sm text-gray-600">
+          <p className="mt-3 text-xs sm:text-sm text-gray-600">
             Landmark: Near Rajiv Chowk Metro Gate No. 5
           </p>
           <a
             href="https://maps.app.goo.gl/example"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-3 inline-block text-sm font-medium text-[#1E3A8A] hover:underline"
+            className="mt-4 inline-block text-sm sm:text-base font-medium text-[#1E3A8A] border border-[#1E3A8A] px-4 py-2 rounded-lg hover:bg-[#1E3A8A] hover:text-white transition"
           >
             📍 View on Google Maps
           </a>

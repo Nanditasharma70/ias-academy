@@ -70,10 +70,21 @@ export default function ExploreBatches() {
         price: "₹79999",
         oldPrice: "₹89999",
       },
+      {
+        id: 4,
+        type: "ONLINE",
+        title: "BA + UPSC Integrated Program",
+        lang: "English",
+        img: "/images/ba-upsc.jpg",
+        start: "15 Aug 2025",
+        end: "15 May 2028",
+        price: "₹79999",
+        oldPrice: "₹89999",
+      },
     ],
     "Combo (GS+Optional)": [
       {
-        id: 4,
+        id: 5,
         type: "ONLINE",
         title: "GS + Public Administration (Combo) 2026",
         lang: "Hinglish",
@@ -86,7 +97,7 @@ export default function ExploreBatches() {
     ],
     Optional: [
       {
-        id: 5,
+        id: 6,
         type: "OFFLINE",
         title: "Geography Optional 2026",
         lang: "English",
@@ -99,7 +110,7 @@ export default function ExploreBatches() {
     ],
     "Test Series": [
       {
-        id: 6,
+        id: 7,
         type: "ONLINE",
         title: "CSAT Test Series (Target 2026) – (Online)",
         lang: "Hinglish",
@@ -110,7 +121,7 @@ export default function ExploreBatches() {
         oldPrice: "₹5499",
       },
       {
-        id: 7,
+        id: 8,
         type: "OFFLINE",
         title: "Prelims Test Series (GS) (Target 2026) – (Offline)",
         lang: "English",
@@ -121,7 +132,7 @@ export default function ExploreBatches() {
         oldPrice: "₹19999",
       },
       {
-        id: 8,
+        id: 9,
         type: "ONLINE",
         title: "SRIJAN 2.0 (Pre + Mains) 2026 (Hinglish)",
         lang: "Hinglish",
@@ -131,6 +142,7 @@ export default function ExploreBatches() {
         price: "₹9999",
         oldPrice: "₹19999",
       },
+
     ],
   };
 
@@ -159,105 +171,90 @@ export default function ExploreBatches() {
         </h2>
 
         {/* Tabs */}
-        <div className="flex justify-center mb-6 overflow-x-auto scrollbar-hide space-x-6 pt-2 px-2 sm:px-0">
+        <div className="flex bg-gray-200 justify-center mb-6 overflow-x-auto scrollbar-hide space-x-6 pt-2 px-2 sm:px-0">
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`flex-shrink-0 pb-2 px-2 whitespace-nowrap ${
-                activeTab === tab
-                  ? "text-[#1E3A8A] border-b-2 border-[#1E3A8A] font-semibold"
-                  : "text-gray-600"
-              }`}
+              className={`flex-shrink-0 pb-2 px-2 whitespace-nowrap ${activeTab === tab
+                ? "text-[#1E3A8A] border-b-2 border-[#1E3A8A] font-semibold"
+                : "text-gray-600"
+                }`}
             >
               {tab}
             </button>
           ))}
         </div>
 
-        {/* Carousel with chevrons */}
+      {/* Carousel without chevrons - Smooth Slide */}
+<div className="relative">
+  <div
+    ref={scrollRef}
+    className="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide snap-x snap-mandatory"
+  >
+    {coursesToShow.map((course) => (
+      <div
+        key={course.id}
+        className="bg-white border rounded-xl shadow-sm overflow-hidden flex-shrink-0 w-64 sm:w-68 md:w-72 snap-center"
+      >
+        {/* Image */}
         <div className="relative">
-          {/* Left Chevron */}
-          <button
-            onClick={() => scroll("left")}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-md hover:bg-gray-100"
+          <Image
+            src={course.img}
+            alt={course.title}
+            width={300}
+            height={200}
+            className="w-full h-48 object-cover"
+          />
+          <span
+            className={`absolute top-2 left-2 px-3 py-1 text-xs font-bold text-white rounded-tr-lg rounded-bl-lg ${
+              course.type === "ONLINE" ? "bg-blue-600" : "bg-red-600"
+            }`}
           >
-            <ChevronLeft className="w-6 h-6 text-gray-700" />
-          </button>
+            {course.type}
+          </span>
+        </div>
 
-          {/* Right Chevron */}
-          <button
-            onClick={() => scroll("right")}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-md hover:bg-gray-100"
-          >
-            <ChevronRight className="w-6 h-6 text-gray-700" />
-          </button>
+        {/* Content */}
+        <div className="p-4">
+          <h3 className="font-semibold text-sm">{course.title}</h3>
+          <span className="inline-block bg-gray-200 text-xs px-2 py-1 rounded mt-2">
+            {course.lang}
+          </span>
 
-          <div
-            ref={scrollRef}
-            className="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide"
-          >
-            {coursesToShow.map((course) => (
-              <div
-                key={course.id}
-                className="bg-white border rounded-xl shadow-sm overflow-hidden flex-shrink-0 w-72"
-              >
-                {/* Image */}
-                <div className="relative">
-                  <Image
-                    src={course.img}
-                    alt={course.title}
-                    width={300}
-                    height={200}
-                    className="w-full h-48 object-cover"
-                  />
-                  <span
-                    className={`absolute top-2 left-2 px-3 py-1 text-xs font-bold text-white rounded-tr-lg rounded-bl-lg ${
-                      course.type === "ONLINE" ? "bg-blue-600" : "bg-red-600"
-                    }`}
-                  >
-                    {course.type}
-                  </span>
-                </div>
+          {course.start && course.end && (
+            <p className="text-xs text-gray-600 mt-2">
+              Starts on {course.start} Ends on {course.end}
+            </p>
+          )}
 
-                {/* Content */}
-                <div className="p-4">
-                  <h3 className="font-semibold text-sm">{course.title}</h3>
-                  <span className="inline-block bg-gray-200 text-xs px-2 py-1 rounded mt-2">
-                    {course.lang}
-                  </span>
+          <div className="mt-2">
+            <span className="text-[#1E3A8A] font-bold mr-2">
+              {course.price}
+            </span>
+            {course.oldPrice && (
+              <span className="line-through text-gray-400 text-sm">
+                {course.oldPrice}
+              </span>
+            )}
+          </div>
 
-                  {course.start && course.end && (
-                    <p className="text-xs text-gray-600 mt-2">
-                      Starts on {course.start} Ends on {course.end}
-                    </p>
-                  )}
-
-                  <div className="mt-2">
-                    <span className="text-[#1E3A8A] font-bold mr-2">
-                      {course.price}
-                    </span>
-                    {course.oldPrice && (
-                      <span className="line-through text-gray-400 text-sm">
-                        {course.oldPrice}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Buttons */}
-                  <div className="flex space-x-2 mt-4">
-                    <button className="flex-1 border border-[#1E3A8A] text-[#1E3A8A] py-1 rounded hover:bg-[#1E3A8A] hover:text-white transition">
-                      EXPLORE
-                    </button>
-                    <button className="flex-1 bg-[#1E3A8A] text-white py-1 rounded hover:bg-blue-900 transition">
-                      BUY NOW
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
+          {/* Buttons */}
+          <div className="flex space-x-2 mt-4">
+            <button className="flex-1 border border-[#1E3A8A] text-[#1E3A8A] py-1 rounded hover:bg-[#1E3A8A] hover:text-white transition">
+              EXPLORE
+            </button>
+            <button className="flex-1 bg-[#1E3A8A] text-white py-1 rounded hover:bg-blue-900 transition">
+              BUY NOW
+            </button>
           </div>
         </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+
 
         {/* Get More */}
         <div className="flex justify-center mt-8">
