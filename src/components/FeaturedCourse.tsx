@@ -7,19 +7,19 @@ const courses = [
   { title: "GS PCM - 2 Year Fledgling", img: "/images/gs.jpg" },
   { title: "Optional Subjects", img: "/images/Optional_Subject.jpg" },
   { title: "CSAT", img: "/images/CSAT.jpg" },
-  { title: "Prelims Test Series", img: "/images/PrelimS.jpg" },
+  { title: "Prelims Test Series", img: "/images/Prelims.jpg" },
   { title: "UPSC Mentorship Program", img: "/images/Mentorship.png" },
   { title: "Module Courses", img: "/images/Module_Courses.jpg" },
   { title: "Mains Test Series", img: "/images/Mains.jpg" },
   { title: "Optional Subject Crash Course", img: "/images/Optional.jpg" },
   { title: "IFoS Programmes", img: "/images/ifos.jpg" },
-  { title: "Interview Guidance Programme", img: "/images/interview.jpg" },
+  { title: "Interview Guidance Programme", img: "/images/Interview.jpg" },
 ];
 
 export default function FeaturedCourses() {
   return (
     <section className="bg-gray-50 py-10 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         {/* Title */}
         <h2 className="text-center text-2xl sm:text-3xl md:text-3xl font-bold text-[#1E3A8A] mb-10">
           Our Featured UPSC CSE Courses
