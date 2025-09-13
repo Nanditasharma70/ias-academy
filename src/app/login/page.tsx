@@ -50,11 +50,11 @@ export default function Login() {
               placeholder="Enter OTP"
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded mb-4 focus:ring-2 focus:ring-[#1E3A8A]"
+              className="w-full p-2 border border-gray-300 rounded mb-4 focus:ring-2 focus:ring-[#1E3A8A]"
             />
             <button
               onClick={handleVerifyOtp}
-              className="w-full bg-[#FFD700] text-[#1E3A8A] py-3 rounded hover:bg-yellow-600 transition"
+              className="w-full bg-[#FFD700] text-[#1E3A8A] py-2 rounded hover:bg-yellow-600 transition"
             >
               Verify OTP
             </button>
