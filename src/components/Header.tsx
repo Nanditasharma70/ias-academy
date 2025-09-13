@@ -55,21 +55,33 @@ export default function Header() {
         {/* Desktop Layout */}
         <div className="hidden sm:flex justify-between items-center">
           {/* Left Side: Logo + All Courses */}
-          <div className="flex items-center gap-6">
+          <div className=" ms-6 flex items-center gap-6">
             {/* Logo */}
             <span className="font-bold text-xl text-[#FFD700]">
               IAS Academy
             </span>
 
             {/* All Courses Button */}
-            <div className="relative inline-block text-left">
+            <div className=" mx-6 relative inline-block text-left">
               {/* Button */}
               <button
                 onClick={() => setOpen(!open)}
                 className="border border-[#FFD700] text-[#FFD700] px-4 py-2 rounded-md hover:bg-[#1E3A8A] hover:text-white transition"
               >
-                All Courses <span className="ml-1">▾</span>
+                UPSC Course <span className="ml-1">▾</span>
               </button>
+               <Link
+            href="/course-page"
+            className=" ms-10 text-[#FFD700]  font-semibold px-4 py-2 transition"
+          >
+
+
+            Govt Exam
+
+
+
+          </Link>
+     
 
               {/* Dropdown Menu */}
               {open && (
@@ -94,7 +106,7 @@ export default function Header() {
 
           {/* Right Side: Login/Register */}
           <Link
-            href="/login"
+            href="/register"
             className="bg-[#FFD700] text-[#1E3A8A] font-semibold px-4 py-2 rounded-md hover:bg-yellow-400  transition"
           >
             Login & Register
