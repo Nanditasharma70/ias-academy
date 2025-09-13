@@ -62,7 +62,7 @@ export default function Login() {
         )}
 
         <p className="text-center mt-4 text-sm text-gray-500">
-          Don't have an account?{" "}
+          New User??{" "}
           <a href="/register" className="text-[#1E3A8A] hover:underline">
             Register
           </a>

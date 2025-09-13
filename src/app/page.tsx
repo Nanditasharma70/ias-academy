@@ -13,7 +13,6 @@ import TopHeader from "@/components/TopHeader";
 import ToppersCarousel from "@/components/TopperCarousel";
 import VideoCarousel from "@/components/VideoCarousel";
 import WhyChoose from "@/components/WhyChoose";
-import WhyChooseUs from "@/components/WhyChoose";
 
 export default function Home() {
   return (
